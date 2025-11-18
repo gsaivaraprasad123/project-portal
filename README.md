@@ -1,26 +1,4 @@
-Absolutely — here is a **clean, professional, production-grade README.md** for your full-stack repo (Backend: Express + Prisma + PostgreSQL, Frontend: Next.js 16 + React 19 + shadcn + Sonner).
 
-It looks great on GitHub and covers:
-
-✔ Tech Stack
-✔ Folder Structure
-✔ Environment Variables
-✔ Setup Instructions
-✔ Database Migrations
-✔ Seeding
-✔ API Overview
-✔ Frontend Features
-✔ Dev Commands
-✔ Deployment Notes
-
-You can paste this directly into:
-📁 **README.md** (root of your repo)
-
----
-
-# 📘 **README.md**
-
-```md
 # 🚀 Project Portal – Full Stack Application  
 A complete Project Management Portal built with:
 
