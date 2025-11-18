@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id        String    @id @default(uuid())
+  name      String
+  users     User[]
+  projects  Project[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  passwordHash String
+  role         GlobalRole?
+  client       Client        @relation(fields: [clientId], references: [id])
+  clientId     String
+  projectUsers ProjectUser[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@map("users")
+}
+
+model Project {
+  id           String        @id @default(uuid())
+  name         String
+  description  String?
+  client       Client        @relation(fields: [clientId], references: [id])
+  clientId     String
+  projectUsers ProjectUser[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@map("projects")
+}
+
+model ProjectUser {
+  id        String      @id @default(uuid())
+  project   Project     @relation(fields: [projectId], references: [id])
+  projectId String
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String
+  role      ProjectRole
+  createdAt DateTime    @default(now())
+
+  @@unique([projectId, userId])
+  @@map("project_users")
+}
+
+enum GlobalRole {
+  admin
+  member
+}
+
+enum ProjectRole {
+  owner
+  developer
+  viewer
+}
